@@ -33,6 +33,7 @@ export default class Game {
     this.cells = [];
     this.usersMoves = [];
     this.movesCounter = 0;
+    this.isFinish = false;
     this.soundOn = true;
     this.imageField = true;
     this.movesSound = new Audio('./audio/move.wav');
@@ -237,11 +238,17 @@ export default class Game {
       this.field.append(cell);
       this.dragAndDrop(cell, i);
 
-      cell.addEventListener('click', () => this.moveCell(i));
+      cell.addEventListener('click', () => {
+        if (!this.isFinish) this.moveCell(i);
+      });
     }
   }
 
   startNewGame() {
+    // let modal = document.querySelector('.modal');
+    // modal.classList.remove('active');
+    // modal.style.display = 'none';
+
     this.initiateGame(Math.sqrt(this.cells.length));
   }
 
@@ -334,8 +341,12 @@ export default class Game {
   finishGame() {
     this.winSound.play();
     let modal = new Modal('div');
-    const message = `Hooray! <br/> You have solved the puzzle!  <br/> Your time - ${this.time}, your moves - ${this.movesCounter}!`;
+    const message = `Hooray! <br/> You have solved the puzzle!  <br/> Your time - ${this.time}, your moves - ${this.movesCounter}! \nClick New Game to start game again!`;
     modal.create('div', message);
+    // let gameBtn = newGameBtn.cloneNode(true);
+    // modal.append(gameBtn);
+
+    this.isFinish = true;
   }
 
   saveGame() {
@@ -455,7 +466,7 @@ export default class Game {
 
       this.dragAndDrop(cell, i);
       cell.addEventListener('click', () => {
-        this.moveCell(i);
+        if (!this.isFinish) this.moveCell(i);
       });
     }
   }
