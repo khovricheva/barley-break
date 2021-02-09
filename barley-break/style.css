@@ -1,0 +1,232 @@
+body {
+  height: 100vh;
+  font-family: 'Montserrat', sans-serif;
+  color: white;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  background-blend-mode: screen;
+  background: linear-gradient(to top, #5ee7df 0%, #b490ca 100%);
+}
+
+.game-area {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.field {
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  position: relative;
+  margin: 0 auto;
+}
+.cell {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+  box-shadow: 0 0 0 0 #667eea inset, 0 0 4px 4px #667eea;
+  border-radius: 10px;
+  position: absolute;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s;
+}
+.selected {
+  opacity: 0.6;
+}
+.hide {
+  display: none;
+}
+.on {
+  color: #8a2be2;
+  background: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+.cell:hover {
+  color: #30cfd0;
+  text-shadow: 4px 2px 15px #fdfcfb, 4px 2px 13px #fdfcfb;
+}
+button {
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  padding: 20px 30px;
+  margin: 10px 20px;
+  position: relative;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  background: none;
+  font-weight: 300;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+button:before,
+button:after {
+  content: '';
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  box-sizing: border-box;
+}
+button:before {
+  bottom: 0;
+  left: 0;
+  border-left: 1px solid white;
+  border-top: 1px solid white;
+  transition: 0s ease opacity 0.8s, 0.2s ease width 0.4s, 0.2s ease height 0.6s;
+}
+button:after {
+  top: 0;
+  right: 0;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  transition: 0s ease opacity 0.4s, 0.2s ease width, 0.2s ease height 0.2s;
+}
+button:hover:before,
+button:hover:after {
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+}
+button:hover:before {
+  transition: 0s ease opacity 0s, 0.2s ease height, 0.2s ease width 0.2s;
+}
+button:hover:after {
+  transition: 0s ease opacity 0.4s, 0.2s ease height 0.4s, 0.2s ease width 0.6s;
+}
+button:hover {
+  opacity: 0.8;
+  cursor: pointer;
+}
+select {
+  font-size: 30px;
+  background: #e0c3fc;
+  color: #8a2be2;
+  width: 70px;
+  border: none;
+  margin: 5px 0;
+}
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 200ms ease-in-out;
+  border-radius: 15px;
+  z-index: 10;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  width: 500px;
+  max-width: 80%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal.active {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.close-button {
+  min-width: 25px;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #fff;
+  position: absolute;
+  margin: 5px;
+  padding: 5px 10px;
+  right: 0;
+  top: 0;
+}
+
+.modal-body {
+  padding: 10px 15px;
+  color: #fff;
+  text-align: center;
+}
+.modal-body button {
+  /* color: black; */
+}
+
+#overlay {
+  position: fixed;
+  opacity: 0;
+  transition: 200ms ease-in-out;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+#overlay.active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.info-panel {
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+  margin: 10px auto;
+}
+.setup-panel {
+  display: flex;
+  justify-content: center;
+}
+.row-score {
+  margin: 5px 0;
+  border-bottom: 1px solid #fff;
+}
+.row-games {
+  margin: 5px 0;
+  cursor: pointer;
+  border-bottom: 1px solid #fff;
+}
+
+@media (max-width: 800px) {
+  .setup-panel {
+    flex-wrap: wrap;
+  }
+}
+@media (max-width: 500px) {
+  button {
+    padding: 5px 10px;
+    margin: 5px 10px;
+  }
+}
+@media (max-width: 425px) {
+  .field {
+    max-width: fit-content;
+  }
+  .info-panel {
+    max-width: 380px;
+  }
+  .cell {
+    width: 6rem !important;
+    height: 6rem !important;
+  }
+}
+@media (max-width: 380px) {
+  .info-panel {
+    max-width: 330px;
+  }
+  .field {
+    max-width: 380px;
+  }
+
+  .cell {
+    width: 25% !important;
+    height: 25% !important;
+  }
+}
