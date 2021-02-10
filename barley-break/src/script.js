@@ -245,10 +245,7 @@ export default class Game {
   }
 
   startNewGame() {
-    // let modal = document.querySelector('.modal');
-    // modal.classList.remove('active');
-    // modal.style.display = 'none';
-
+    this.isFinish = false;
     this.initiateGame(Math.sqrt(this.cells.length));
   }
 
@@ -343,9 +340,6 @@ export default class Game {
     let modal = new Modal('div');
     const message = `Hooray! <br/> You have solved the puzzle!  <br/> Your time - ${this.time}, your moves - ${this.movesCounter}! \nClick New Game to start game again!`;
     modal.create('div', message);
-    // let gameBtn = newGameBtn.cloneNode(true);
-    // modal.append(gameBtn);
-
     this.isFinish = true;
   }
 
